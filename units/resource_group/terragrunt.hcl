@@ -17,4 +17,5 @@ include "region" {
 
 inputs = {
 	name = "the_name_input_in_the_unit"
+	region = "northeurope"
 }
