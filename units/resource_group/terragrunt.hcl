@@ -3,7 +3,6 @@ include "root" {
 }
 
 locals {
-  subscription_vars = read_terragrunt_config(find_in_parent_folders("subscription.hcl"))
   region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl"))
   resourcegroup_vars = read_terragrunt_config(find_in_parent_folders("resourcegroup.hcl"))
 }
