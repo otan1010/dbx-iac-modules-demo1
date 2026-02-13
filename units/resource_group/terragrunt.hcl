@@ -13,5 +13,5 @@ terraform {
 
 inputs = {
 	name = local.resourcegroup_vars.locals.azure_resourcegroup_name
-	location = local.region.locals.azure_region
+	location = local.region_vars.locals.azure_region
 }
