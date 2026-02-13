@@ -7,6 +7,7 @@ terraform {
 }
 
 inputs = {
-	name = include.root.resourcegroup.azure_resourcegroup_name
-	location = include.root.region.azure_region
+	#name = include.root.resourcegroup.azure_resourcegroup_name
+	name = include.root.include.region.locals.azure_region
+	#location = include.root.region.azure_region
 }
