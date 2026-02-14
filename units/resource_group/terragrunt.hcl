@@ -19,7 +19,3 @@ inputs = {
   #name = local.name
   location = local.location
 }
-
-output {
-  pathh = "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/terraform.tfstate"
-}
