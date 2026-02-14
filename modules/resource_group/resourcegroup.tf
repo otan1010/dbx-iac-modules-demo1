@@ -4,6 +4,6 @@ resource "azurerm_resource_group" "this" {
 }
 
 output "relative_paths" {
-  #name = "relative_path"
-  pathh = "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/terraform.tfstate"
+  description = "the relative path terragrunt hopefully outputs"
+  value = "${get_parent_terragrunt_dir()}/${path_relative_to_include()}/terraform.tfstate"
 }
