@@ -6,8 +6,8 @@ locals {
   region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl"))
   location = local.region_vars.locals.azure_region
 
-  resourcegroup_vars = read_terragrunt_config(find_in_parent_folders("resourcegroup.hcl"))
-  name = local.resourcegroup_vars.locals.azure_resourcegroup_name
+  resource_group_vars = read_terragrunt_config(find_in_parent_folders("resource_group.hcl"))
+  name = local.resource_group_vars.locals.azure_resource_group_name
 }
 
 terraform {
