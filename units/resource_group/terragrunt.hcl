@@ -15,7 +15,6 @@ terraform {
 }
 
 inputs = {
-  name = "testname1"
-  #name = local.name
+  name = local.name
   location = local.location
 }
