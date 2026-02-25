@@ -31,12 +31,10 @@ terraform {
 }
 
 locals {
-  # Explicit unit interface:
-  # - environment_abbreviation and region come from root.hcl inputs
-  # - rg_name comes from stack values/inputs
-  env    = try(var.environment_abbreviation, null)
-  region = try(var.region, null)
-  rg     = try(var.rg_name, null)
+  # These are expected to be passed in (from root + stack)
+  env    = try(local.environment_abbreviation, null)
+  region = try(local.region, null)
+  rg     = try(local.rg_name, null)
 }
 
 inputs = {
