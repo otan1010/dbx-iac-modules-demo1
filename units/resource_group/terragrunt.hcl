@@ -4,10 +4,10 @@ include "root" {
 
 locals {
   region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl"))
-  location = local.region_vars.locals.azure_region
+  region = local.region_vars.locals.region
 
-  resource_group_vars = read_terragrunt_config(find_in_parent_folders("resource_group.hcl"))
-  name = local.resource_group_vars.locals.azure_resource_group_name
+  rgrp_vars = read_terragrunt_config(find_in_parent_folders("resource_group.hcl"))
+  prefix = local.rgrp_vars.locals.resource_group_prefix
 }
 
 terraform {
@@ -15,6 +15,6 @@ terraform {
 }
 
 inputs = {
-  name = local.name
-  location = local.location
+  name = "${local.prefix}-staticname-${local.region}"
+  location = local.region
 }
