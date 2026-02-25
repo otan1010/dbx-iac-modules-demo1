@@ -1,4 +1,4 @@
-include "root" {
+ninclude "root" {
   path = find_in_parent_folders("root.hcl")
 }
 
@@ -19,5 +19,5 @@ terraform {
 
 inputs = {
   name = "rg-${local.rg_name}-${local.env}-${local.region}"
-  location = local.region
+  region = local.region
 }
