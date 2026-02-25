@@ -3,11 +3,11 @@ include "root" {
 }
 
 locals {
+  sub_vars = read_terragrunt_config(find_in_parent_folders("subscription.hcl"))
+  environment = local.sub_vars.locals.environment_abbreviation
+
   region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl"))
   region = local.region_vars.locals.region
-
-  rgrp_vars = read_terragrunt_config(find_in_parent_folders("resource_group.hcl"))
-  prefix = local.rgrp_vars.locals.resource_group_prefix
 }
 
 terraform {
@@ -15,6 +15,6 @@ terraform {
 }
 
 inputs = {
-  name = "${local.prefix}-staticname-${local.region}"
+  name = "rg-staticname-${local.environment}-${local.region}"
   location = local.region
 }
