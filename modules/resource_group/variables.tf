@@ -3,7 +3,7 @@ variable "name" {
   type        = string
 }
 
-variable "location" {
+variable "region" {
   description = "Azure region.."
   type        = string
 }
