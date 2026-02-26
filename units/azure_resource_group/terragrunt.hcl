@@ -3,7 +3,7 @@ include "root" {
 }
 
 include "azure_provider" {
-  path = find_in_parent_folders("azure_providers.hcl")
+  path = find_in_parent_folders("provider_azure.hcl")
 }
 
 terraform {
