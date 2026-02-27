@@ -14,4 +14,5 @@ inputs = {
   name = values.name
   region = values.region
   rg = values.rg
+  workspace_name = values.workspace_name
 }
