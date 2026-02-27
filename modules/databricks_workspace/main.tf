@@ -2,12 +2,12 @@ resource "azurerm_virtual_network" "this" {
   name                = "demo-databricks-vnet"
   address_space       = ["10.0.0.0/16"]
   location            = var.region
-  resource_group_name = var.resource_group
+  resource_group_name = var.rg
 }
 
 resource "azurerm_subnet" "public" {
   name                 = "demo-public-subnet"
-  resource_group_name  = var.resource_group
+  resource_group_name  = var.rg
   virtual_network_name = "vnet-public"
   address_prefixes     = ["10.0.1.0/24"]
 
@@ -27,7 +27,7 @@ resource "azurerm_subnet" "public" {
 
 resource "azurerm_subnet" "private" {
   name                 = "demo-private-subnet"
-  resource_group_name  = var.resource_group
+  resource_group_name  = var.rg
   virtual_network_name = "vnet-private"
   address_prefixes     = ["10.0.2.0/24"]
 
@@ -58,15 +58,15 @@ resource "azurerm_subnet_network_security_group_association" "public" {
 resource "azurerm_network_security_group" "this" {
   name                = "demo-databricks-nsg"
   location            = var.region
-  resource_group_name = var.resource_group
+  resource_group_name = var.rg
 }
 
 resource "azurerm_databricks_workspace" "this" {
   name                = var.workspace_name
   location            = var.region
-  resource_group_name = var.resource_group
+  resource_group_name = var.rg
   sku                         = "premium"
-  managed_resource_group_name = "${var.resource_group}-dbxmanaged"
+  managed_resource_group_name = "${var.rg}-dbxmanaged"
 
 	  custom_parameters {
       no_public_ip        = true
