@@ -62,7 +62,7 @@ resource "azurerm_network_security_group" "this" {
 }
 
 resource "azurerm_databricks_workspace" "this" {
-  name                = var.workspace_name
+  name                = var.name
   location            = var.region
   resource_group_name = var.rg
   sku                         = "premium"
