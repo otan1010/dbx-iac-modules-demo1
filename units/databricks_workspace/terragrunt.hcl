@@ -10,7 +10,7 @@ terraform {
   source = "git::https://github.com/otan1010/dbx-iac-modules-demo1.git//modules/databricks_workspace?ref=${values.version}"
 }
 
-#inputs = {
-#  name = values.name
-#  region = values.region
-#}
+inputs = {
+  name = values.name
+  region = values.region
+}

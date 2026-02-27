@@ -1,19 +1,14 @@
-resource "azurerm_resource_group" "this" {
-  name     = "databricks_demo_rg"
-  location = var.region
-}
-
 resource "azurerm_virtual_network" "this" {
   name                = "demo-databricks-vnet"
   address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.this.location
-  resource_group_name = azurerm_resource_group.this.name
+  location            = var.region
+  resource_group_name = var.resource_group
 }
 
 resource "azurerm_subnet" "public" {
   name                 = "demo-public-subnet"
-  resource_group_name  = azurerm_resource_group.this.name
-  virtual_network_name = azurerm_virtual_network.this.name
+  resource_group_name  = var.resource_group
+  virtual_network_name = "vnet-public"
   address_prefixes     = ["10.0.1.0/24"]
 
   delegation {
@@ -32,8 +27,8 @@ resource "azurerm_subnet" "public" {
 
 resource "azurerm_subnet" "private" {
   name                 = "demo-private-subnet"
-  resource_group_name  = azurerm_resource_group.this.name
-  virtual_network_name = azurerm_virtual_network.this.name
+  resource_group_name  = var.resource_group
+  virtual_network_name = "vnet-private"
   address_prefixes     = ["10.0.2.0/24"]
 
   delegation {
@@ -62,16 +57,16 @@ resource "azurerm_subnet_network_security_group_association" "public" {
 
 resource "azurerm_network_security_group" "this" {
   name                = "demo-databricks-nsg"
-  location            = azurerm_resource_group.this.location
-  resource_group_name = azurerm_resource_group.this.name
+  location            = var.region
+  resource_group_name = var.resource_group
 }
 
 resource "azurerm_databricks_workspace" "this" {
-  name                        = "databricks_demo_workspace"
-  resource_group_name         = azurerm_resource_group.this.name
-  location                    = azurerm_resource_group.this.location
+  name                = var.workspace_name
+  location            = var.region
+  resource_group_name = var.resource_group
   sku                         = "premium"
-  managed_resource_group_name = "databricks_demo_rg_managed"
+  managed_resource_group_name = "${var.resource_group}-dbxmanaged"
 
 	  custom_parameters {
       no_public_ip        = true
