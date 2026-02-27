@@ -2,7 +2,7 @@ include "root" {
   path = find_in_parent_folders("root.hcl")
 }
 
-include "azure_provider" {
+include "azure_providier" {
   path = find_in_parent_folders("provider_azure.hcl")
 }
 
