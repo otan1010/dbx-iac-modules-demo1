@@ -13,4 +13,5 @@ terraform {
 inputs = {
   name = values.name
   region = values.region
+  resource_group = values.resource_group
 }
