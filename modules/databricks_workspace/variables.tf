@@ -8,7 +8,7 @@ variable "region" {
   type        = string
 }
 
-variable "resource_group" {
+variable "rg" {
   description = "Resource group for the workspace."
   type        = string
 }
