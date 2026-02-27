@@ -2,6 +2,10 @@ include "root" {
   path = find_in_parent_folders("root.hcl")
 }
 
+include "azure_provider" {
+  path = find_in_parent_folders("provider_azure.hcl")
+}
+
 include "databricks_account_provider" {
   path = find_in_parent_folders("provider_dbx_account.hcl")
 }
