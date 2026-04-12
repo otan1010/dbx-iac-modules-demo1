@@ -21,7 +21,7 @@ inputs = {
 }
 
 dependency "metastore" {
-  config_path = "${get_repo_root()}/_tenant_name/_subscription_dbx-demo-development/_region_northeurope/metastore/databricks_metastore/metastore-northeurope"
+  config_path = "${get_repo_root()}/_tenant_name/_subscription_dbx-demo-development/_region_northeurope/metastore/"
 
   mock_outputs = {
     id = 0000
