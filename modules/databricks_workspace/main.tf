@@ -78,3 +78,8 @@ resource "azurerm_databricks_workspace" "this" {
       private_subnet_network_security_group_association_id = azurerm_subnet_network_security_group_association.private.id
   }
 }
+
+resource "databricks_metastore_assignment" "this" {
+  metastore_id = var.databricks_metastore_id
+  workspace_id = azurerm_databricks_workspace.this.id
+}
