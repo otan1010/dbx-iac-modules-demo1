@@ -17,6 +17,6 @@ unit "databricks_metastore_primary" {
   }
 }
 
-stack_output "metastore_id" {
+output "metastore_id" {
   value = unit.databricks_metastore.metastore_id
 }
