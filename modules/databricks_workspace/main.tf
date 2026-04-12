@@ -83,5 +83,5 @@ resource "azurerm_databricks_workspace" "this" {
 
 resource "databricks_metastore_assignment" "this" {
   metastore_id = var.databricks_metastore_id
-  workspace_id = azurerm_databricks_workspace.this.id
+  workspace_id = azurerm_databricks_workspace.this.workspace_id
 }
