@@ -8,7 +8,8 @@ resource "azurerm_virtual_network" "this" {
 resource "azurerm_subnet" "public" {
   name                 = "demo-public-subnet"
   resource_group_name  = var.rg
-  virtual_network_name = "vnet-public"
+  #virtual_network_name = "vnet-public"
+  virtual_network_name = azurerm_virtual_network.this.name
   address_prefixes     = ["10.0.1.0/24"]
 
   delegation {
@@ -28,7 +29,8 @@ resource "azurerm_subnet" "public" {
 resource "azurerm_subnet" "private" {
   name                 = "demo-private-subnet"
   resource_group_name  = var.rg
-  virtual_network_name = "vnet-private"
+  #virtual_network_name = "vnet-private"
+  virtual_network_name = azurerm_virtual_network.this.name
   address_prefixes     = ["10.0.2.0/24"]
 
   delegation {
