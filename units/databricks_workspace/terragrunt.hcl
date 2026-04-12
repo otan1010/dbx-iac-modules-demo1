@@ -24,7 +24,6 @@ dependency "metastore" {
   config_path = "..\metastore"
 
   mock_outputs = {
-    endpoint = "mock-endpoint"
-    db_name  = "mock-metastore-name"
+    id = 0000
   }
 }
