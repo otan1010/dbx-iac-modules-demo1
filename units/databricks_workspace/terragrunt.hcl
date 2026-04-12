@@ -21,7 +21,7 @@ inputs = {
 }
 
 dependency "metastore" {
-  config_path = "..\metastore"
+  config_path = "../metastore"
 
   mock_outputs = {
     id = 0000
