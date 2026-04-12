@@ -16,3 +16,7 @@ unit "databricks_metastore_primary" {
     region = "${local.region}"
   }
 }
+
+stack_output "metastore_id" {
+  value = unit.databricks_metastore.metastore_id
+}
