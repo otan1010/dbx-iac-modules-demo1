@@ -21,7 +21,7 @@ inputs = {
 }
 
 dependency "metastore" {
-  config_path = "${get_repo_root()}/_tenant_name/_subscription_dbx-demo-development/_region_northeurope/metastore/"
+  config_path = "C:/Users/40724616/aaa/dbx-iac-live-demo1/_tenant_name/_subscription_dbx-demo-development/_region_northeurope/metastore/.terragrunt-stack/databricks_metastore/.terragrunt-stack/metastore-northeurope"
 
   mock_outputs = {
     id = 0000
