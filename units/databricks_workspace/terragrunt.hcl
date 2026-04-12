@@ -18,7 +18,7 @@ inputs = {
   name = values.name
   region = values.region
   rg = values.rg
-  databricks_metastore_id = dependency.metastore.outputs.databricks_metastore_id
+  databricks_metastore_id = dependency.metastore.outputs.id
 }
 
 dependency "metastore" {
