@@ -19,3 +19,12 @@ inputs = {
   region = values.region
   rg = values.rg
 }
+
+dependency "metastore" {
+  config_path = values.metastore_path
+
+  mock_outputs = {
+    endpoint = "mock-endpoint"
+    db_name  = "mock-metastore-name"
+  }
+}
