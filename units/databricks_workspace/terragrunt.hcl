@@ -21,7 +21,7 @@ inputs = {
 }
 
 dependency "metastore" {
-  config_path = "../metastore"
+  config_path = "${get_terragrunt_dir()}/../../../metastore/.terragrunt-stack/databricks_metastore/.terragrunt-stack/metastore-northeurope"
 
   mock_outputs = {
     id = 0000
