@@ -12,3 +12,8 @@ variable "rg" {
   description = "Resource group for the workspace."
   type        = string
 }
+
+variable "databricks_metastore_id" {
+  description = "ID for Databricks Metastore."
+  type        = string
+}
