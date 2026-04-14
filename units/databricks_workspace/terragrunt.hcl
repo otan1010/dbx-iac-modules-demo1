@@ -31,7 +31,7 @@ inputs = {
 ### with), since metastores have a one-to-many relationship with workspaces.
 
 dependency "metastore" {
-  config_path = "../../../../../../../metastore/.terragrunt-stack/databricks_metastore/.terragrunt-stack/metastore"
+  config_path = "../../../../../../metastore/.terragrunt-stack/databricks_metastore/.terragrunt-stack/metastore"
 
   mock_outputs = {
     databricks_metastore_id = 00000000-0000-0000-0000-000000000000
