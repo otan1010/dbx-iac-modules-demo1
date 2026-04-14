@@ -1,3 +1,8 @@
+locals {
+  region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl"))
+  region_name = local.region_vars.locals.region # e.g., "northeurope"
+}
+
 include "root" {
   path = find_in_parent_folders("root.hcl")
 }
@@ -23,7 +28,7 @@ inputs = {
 
 dependency "metastore" {
   #config_path = "C:/Users/40724616/aaa/dbx-iac-live-demo1/_tenant_name/_subscription_dbx-demo-development/_region_northeurope/metastore/.terragrunt-stack/databricks_metastore/.terragrunt-stack/metastore-northeurope"
-  config_path = "../../../metastore"
+    config_path = "${get_repo_root()}/_tenant_default/_region_${local.region_name}/metastore/.terragrunt-stack/databricks_metastore/.terragrunt-stack/metastore-${local.region_name}"
 
   mock_outputs = {
     databricks_metastore_id = 00000000-0000-0000-0000-000000000000
