@@ -22,7 +22,8 @@ inputs = {
 }
 
 dependency "metastore" {
-  config_path = "C:/Users/40724616/aaa/dbx-iac-live-demo1/_tenant_name/_subscription_dbx-demo-development/_region_northeurope/metastore/.terragrunt-stack/databricks_metastore/.terragrunt-stack/metastore-northeurope"
+  #config_path = "C:/Users/40724616/aaa/dbx-iac-live-demo1/_tenant_name/_subscription_dbx-demo-development/_region_northeurope/metastore/.terragrunt-stack/databricks_metastore/.terragrunt-stack/metastore-northeurope"
+  config_path = "../../../metastore"
 
   mock_outputs = {
     databricks_metastore_id = 00000000-0000-0000-0000-000000000000
