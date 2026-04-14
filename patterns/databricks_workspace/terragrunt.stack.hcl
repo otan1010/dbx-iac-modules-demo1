@@ -8,8 +8,11 @@ locals {
   environment_vars = read_terragrunt_config(find_in_parent_folders("environment.hcl"))
   environment = local.environment_vars.locals.name
 
-  rg_name = "rg-dbx-${local.environment}-${local.region}"
-  ws_name = "ws-dbx-${local.environment}-${local.region}"
+  subscription_vars = read_terragrunt_config(find_in_parent_folders("subscription.hcl"))
+  owner = local.subscription_vars.locals.owner
+
+  rg_name = "rg-dbx-${local.environment}-${local.region}-${local.owner}"
+  ws_name = "ws-dbx-${local.environment}-${local.region}-${local.owner}"
 }
 
 unit "core_databricks_resource_group" {
