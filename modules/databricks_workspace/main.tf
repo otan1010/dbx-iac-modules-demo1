@@ -1,3 +1,4 @@
+# --- NETWORK RESOURCES (VNET & SUBNETS) ---
 resource "azurerm_virtual_network" "this" {
   name                = "demo-databricks-vnet"
   address_space       = ["10.0.0.0/16"]
@@ -8,20 +9,18 @@ resource "azurerm_virtual_network" "this" {
 resource "azurerm_subnet" "public" {
   name                 = "demo-public-subnet"
   resource_group_name  = var.rg
-  #virtual_network_name = "vnet-public"
   virtual_network_name = azurerm_virtual_network.this.name
   address_prefixes     = ["10.0.1.0/24"]
 
   delegation {
     name = "demo-databricks-del"
-
     service_delegation {
+      name = "Microsoft.Databricks/workspaces"
       actions = [
         "Microsoft.Network/virtualNetworks/subnets/join/action",
         "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
         "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
       ]
-      name = "Microsoft.Databricks/workspaces"
     }
   }
 }
@@ -29,27 +28,27 @@ resource "azurerm_subnet" "public" {
 resource "azurerm_subnet" "private" {
   name                 = "demo-private-subnet"
   resource_group_name  = var.rg
-  #virtual_network_name = "vnet-private"
   virtual_network_name = azurerm_virtual_network.this.name
   address_prefixes     = ["10.0.2.0/24"]
 
   delegation {
     name = "demo-databricks-del"
-
     service_delegation {
+      name = "Microsoft.Databricks/workspaces"
       actions = [
         "Microsoft.Network/virtualNetworks/subnets/join/action",
         "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
         "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
       ]
-      name = "Microsoft.Databricks/workspaces"
     }
   }
 }
 
-resource "azurerm_subnet_network_security_group_association" "private" {
-  subnet_id                 = azurerm_subnet.private.id
-  network_security_group_id = azurerm_network_security_group.this.id
+# --- NETWORK SECURITY ---
+resource "azurerm_network_security_group" "this" {
+  name                = "demo-databricks-nsg"
+  location            = var.region
+  resource_group_name = var.rg
 }
 
 resource "azurerm_subnet_network_security_group_association" "public" {
@@ -57,31 +56,54 @@ resource "azurerm_subnet_network_security_group_association" "public" {
   network_security_group_id = azurerm_network_security_group.this.id
 }
 
-resource "azurerm_network_security_group" "this" {
-  name                = "demo-databricks-nsg"
-  location            = var.region
-  resource_group_name = var.rg
+resource "azurerm_subnet_network_security_group_association" "private" {
+  subnet_id                 = azurerm_subnet.private.id
+  network_security_group_id = azurerm_network_security_group.this.id
 }
 
+# --- DATABRICKS WORKSPACE ---
 resource "azurerm_databricks_workspace" "this" {
-  name                = var.name
-  location            = var.region
-  resource_group_name = var.rg
-  sku                         = "premium"
+  name                        = var.name
+  location                    = var.region
+  resource_group_name         = var.rg
+  sku                         = "premium" # UC requirement
   managed_resource_group_name = "${var.rg}-dbxmanaged"
 
-	  custom_parameters {
-      no_public_ip        = true
-      public_subnet_name  = azurerm_subnet.public.name
-      private_subnet_name = azurerm_subnet.private.name
-      virtual_network_id  = azurerm_virtual_network.this.id
+  custom_parameters {
+    no_public_ip        = true
+    public_subnet_name  = azurerm_subnet.public.name
+    private_subnet_name = azurerm_subnet.private.name
+    virtual_network_id  = azurerm_virtual_network.this.id
 
-      public_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.public.id
-      private_subnet_network_security_group_association_id = azurerm_subnet_network_security_group_association.private.id
+    public_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.public.id
+    private_subnet_network_security_group_association_id = azurerm_subnet_network_security_group_association.private.id
   }
 }
 
+# --- UNITY CATALOG & LEGACY DISABLEMENT ---
+
+# 1. Standard Metastore Assignment
 resource "databricks_metastore_assignment" "this" {
   metastore_id = var.databricks_metastore_id
   workspace_id = azurerm_databricks_workspace.this.workspace_id
+}
+
+# 2. CHANGE: Set 'main' (or your UC catalog) as default so users don't land in hive_metastore
+resource "databricks_default_namespace_setting" "this" {
+  namespace {
+    value = "main" 
+  }
+  
+  # Ensure the workspace is ready and assigned to UC first
+  depends_on = [databricks_metastore_assignment.this]
+}
+
+# 3. CHANGE: Explicitly disable legacy Hive Metastore access and DBFS root access
+resource "databricks_disable_legacy_access_setting" "this" {
+  disable_legacy_access {
+    value = true
+  }
+
+  # This must happen AFTER the default namespace is changed to avoid "locking out" users from any catalog
+  depends_on = [databricks_default_namespace_setting.this]
 }
