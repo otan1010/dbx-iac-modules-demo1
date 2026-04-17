@@ -3,7 +3,7 @@ locals {
   region = local.region_vars.locals.name
 }
 
-unit "databricks_metastore_primary" {
+unit "databricks_metastore" {
   source = "git::https://github.com/otan1010/dbx-iac-modules-demo1.git//units/databricks_metastore?ref=main"
   path = "metastore"
   values = {
