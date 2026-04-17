@@ -12,6 +12,10 @@ terraform {
 
 dependency "dbx_acc_adm_grp" {
   config_path = "../dbx_acc_adm_grp" 
+
+  mock_outputs = {
+    entraid_group_id = 00000000-0000-0000-0000-000000000000
+  }
 }
 
 inputs = {
