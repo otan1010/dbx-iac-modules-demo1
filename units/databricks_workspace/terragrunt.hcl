@@ -19,7 +19,7 @@ inputs = {
   region = values.region
   rg = values.rg
   databricks_metastore_id = dependency.dbx_metastore.outputs.databricks_metastore_id
-  databricks_metastore_id = dependency.dbx_account.outputs.entraid_group_id
+  dbx_acc_adm_grp_id = dependency.dbx_account.outputs.entraid_group_id
 }
 
 ### This is a cross-stack dependency, which is currently (2026-14-14) not supported, see:
