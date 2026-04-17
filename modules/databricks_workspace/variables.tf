@@ -17,3 +17,8 @@ variable "databricks_metastore_id" {
   description = "ID for Databricks Metastore."
   type        = string
 }
+
+variable "entraid_group_id" {
+  description = "ID for Databricks EntraID admin group."
+  type        = string
+}
