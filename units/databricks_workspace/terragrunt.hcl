@@ -18,8 +18,8 @@ inputs = {
   name = values.name
   region = values.region
   rg = values.rg
-  databricks_metastore_id = dependency.dbx_metastore.outputs.databricks_metastore_id
-  dbx_acc_adm_grp_id = dependency.dbx_account.outputs.entraid_group_id
+  databricks_metastore_id = dependency.dbx_metastore_id.outputs.databricks_metastore_id
+  dbx_acc_adm_grp_id = dependency.dbx_acc_adm_grp.outputs.entraid_group_id
 }
 
 ### This is a cross-stack dependency, which is currently (2026-14-14) not supported, see:
@@ -31,7 +31,7 @@ inputs = {
 ### to follow DRY principles this is necessary (which is the whole point of terragrunt to begin
 ### with), since metastores have a one-to-many relationship with workspaces.
 
-dependency "dbx_metastore" {
+dependency "dbx_metastore_id" {
   config_path = "../../../../../../metastore/.terragrunt-stack/databricks_metastore/.terragrunt-stack/metastore"
 
   mock_outputs = {
@@ -39,7 +39,7 @@ dependency "dbx_metastore" {
   }
 }
 
-dependency "dbx_account" {
+dependency "dbx_acc_adm_grp" {
   config_path = "../../../../../../../databricks_account/.terragrunt-stack/databricks_account/.terragrunt-stack/dbx_acc_adm_grp"
 
   mock_outputs = {
