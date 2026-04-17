@@ -42,6 +42,6 @@ dependency "dbx-account-admins" {
   config_path = "../../../../../../../databricks_account/.terragrunt-stack/databricks_account/.terragrunt-stack/dbx_acc_adm_grp"
 
   mock_outputs = {
-    name = "mock-dbx-account-admins"
+    entraid_group_id = 00000000-0000-0000-0000-000000000000
   }
 }
