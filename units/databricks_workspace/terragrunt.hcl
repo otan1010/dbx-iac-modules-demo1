@@ -38,7 +38,7 @@ dependency "metastore" {
   }
 }
 
-dependency "dbx-account-admin-group" {
+dependency "dbx_acc_adm_grp" {
   config_path = "../../../../../../../databricks_account/.terragrunt-stack/databricks_account/.terragrunt-stack/dbx_acc_adm_grp"
 
   mock_outputs = {
