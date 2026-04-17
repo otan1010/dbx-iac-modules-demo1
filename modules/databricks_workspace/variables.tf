@@ -18,7 +18,7 @@ variable "databricks_metastore_id" {
   type        = string
 }
 
-variable "entraid_group_id" {
+variable "dbx_acc_adm_grp_id" {
   description = "ID for Databricks EntraID admin group."
   type        = string
 }
