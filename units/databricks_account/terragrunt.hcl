@@ -9,3 +9,11 @@ include "databricks_account_provider" {
 terraform {
   source = "git::https://github.com/otan1010/dbx-iac-modules-demo1.git//modules/databricks_account?ref=${values.version}"
 }
+
+dependency "dbx_acc_adm_grp" {
+  config_path = "../dbx_acc_adm_grp" 
+}
+
+inputs = {
+  dbx_acc_adm_grp_id = dependency.dbx_acc_adm_grp.outputs.entraid_group_id
+}
