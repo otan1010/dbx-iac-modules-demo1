@@ -4,7 +4,12 @@ resource "databricks_disable_legacy_features_setting" "this" {
   }
 }
 
+resource "databricks_group" "dbx_account_admins" {
+  display_name = var.dbx_acc_adm_grp_name
+  external_id  = var.dbx_acc_adm_grp_id
+}
+
 resource "databricks_group_role" "account_admin" {
-  group_id = var.dbx_acc_adm_grp_id
+  group_id = databricks_group.dbx_account_admins.id
   role     = "account_admin"
 }
