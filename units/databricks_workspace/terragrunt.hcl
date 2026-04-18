@@ -19,7 +19,7 @@ inputs = {
   region = values.region
   rg = values.rg
   databricks_metastore_id = dependency.dbx_metastore_id.outputs.databricks_metastore_id
-  dbx_acc_adm_grp_id = dependency.dbx_acc_adm_grp.outputs.entraid_group_id
+  dbx_acc_adm_grp_object_id = dependency.dbx_acc_adm_grp.outputs.entraid_group_object_id
 }
 
 ### This is a cross-stack dependency, which is currently (2026-14-14) not supported, see:
@@ -43,6 +43,6 @@ dependency "dbx_acc_adm_grp" {
   config_path = "../../../../../../../databricks_account/.terragrunt-stack/databricks_account/.terragrunt-stack/dbx_acc_adm_grp"
 
   mock_outputs = {
-    entraid_group_id = 00000000-0000-0000-0000-000000000000
+    entraid_group_object_id = 00000000-0000-0000-0000-000000000000
   }
 }
