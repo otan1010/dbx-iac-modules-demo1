@@ -1,6 +1,6 @@
 output "entraid_group_id" {
   description = "The Object ID of the created EntraID group."
-  value       = azuread_group.this.id
+  value       = azuread_group.this.object_id
 }
 
 output "entraid_group_display_name" {
