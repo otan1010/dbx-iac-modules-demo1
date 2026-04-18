@@ -1,4 +1,4 @@
-output "entraid_group_id" {
+output "entraid_group_object_id" {
   description = "The Object ID of the created EntraID group."
   value       = azuread_group.this.object_id
 }
