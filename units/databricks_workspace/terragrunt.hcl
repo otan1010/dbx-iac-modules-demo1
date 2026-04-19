@@ -26,10 +26,10 @@ inputs = {
 ### https://docs.terragrunt.com/features/stacks/explicit/#dependencies-cannot-be-set-on-stacks
 ### The workaround is to create a dependency from one unit in a stack to another unit in another
 ### stack. Since the relative paths between them is evaluated after generation, the path needs
-### to traverse all static and dynamic folders (".terragrunt-stack"). This is very brittle and
-### depends on a very specific folder structure in the live repository. However, in order
+### to traverse all static and dynamic folders (".terragrunt-stack", etc.). This is very brittle
+###and depends on a very specific folder structure in the live repository. However, in order
 ### to follow DRY principles this is necessary (which is the whole point of terragrunt to begin
-### with), since metastores have a one-to-many relationship with workspaces.
+### with).
 
 dependency "dbx_metastore_id" {
   config_path = "../../../../../../metastore/.terragrunt-stack/databricks_metastore/.terragrunt-stack/metastore"
