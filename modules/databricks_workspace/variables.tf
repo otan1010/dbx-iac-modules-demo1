@@ -22,3 +22,8 @@ variable "dbx_ws_adm_grp_object_id" {
   type        = string
   description = "The object ID of the Azure AD group to make workspace admin."
 }
+
+variable "dbx_ws_adm_grp_display_name" {
+  type        = string
+  description = "The display name of the Azure AD group to make workspace admin."
+}
