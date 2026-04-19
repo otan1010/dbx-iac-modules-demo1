@@ -10,7 +10,7 @@ include "databricks_account_provider" {
   path = find_in_parent_folders("provider_dbx_account.hcl")
 }
 
-include "databricks_account_provider" {
+include "databricks_workspace_provider" {
   path = find_in_parent_folders("provider_dbx_workspace.hcl")
 }
 
