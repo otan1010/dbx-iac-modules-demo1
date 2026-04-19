@@ -31,6 +31,7 @@ dependency "dbx_mstore_adm_grp" {
 inputs = {
   dbx_acc_adm_grp_object_id = dependency.dbx_acc_adm_grp.outputs.entraid_group_object_id
   dbx_acc_adm_grp_display_name = dependency.dbx_acc_adm_grp.outputs.entraid_group_display_name
+
   dbx_mstore_adm_grp_object_id = dependency.dbx_mstore_adm_grp.outputs.entraid_group_object_id
   dbx_mstore_adm_grp_display_name = dependency.dbx_mstore_adm_grp.outputs.entraid_group_display_name
 }
