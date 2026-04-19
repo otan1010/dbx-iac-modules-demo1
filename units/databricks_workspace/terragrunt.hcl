@@ -38,11 +38,3 @@ dependency "dbx_metastore_id" {
     databricks_metastore_id = 00000000-0000-0000-0000-000000000000
   }
 }
-
-dependency "dbx_acc_adm_grp" {
-  config_path = "../../../../../../../databricks_account/.terragrunt-stack/databricks_account/.terragrunt-stack/dbx_acc_adm_grp"
-
-  mock_outputs = {
-    entraid_group_object_id = 00000000-0000-0000-0000-000000000000
-  }
-}
