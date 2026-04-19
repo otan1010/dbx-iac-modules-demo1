@@ -80,16 +80,19 @@ resource "azurerm_databricks_workspace" "this" {
   }
 }
 
-# --- UNITY CATALOG & LEGACY DISABLEMENT ---
-
-# 1. Standard Metastore Assignment
 resource "databricks_metastore_assignment" "this" {
   provider = databricks.account_level
   metastore_id = var.databricks_metastore_id
   workspace_id = azurerm_databricks_workspace.this.workspace_id
 }
 
-# 2. CHANGE: Set 'main' (or your UC catalog) as default so users don't land in hive_metastore
+resource "databricks_mws_permission_assignment" "ws_adm_grp" {
+  provider = databricks.account_level
+  workspace_id = azurerm_databricks_workspace.this.workspace_id
+  principal_id = databricks_group.data_eng.id
+  permissions  = ["ADMIN"]
+}
+
 resource "databricks_default_namespace_setting" "this" {
   provider = databricks.workspace_level
   namespace {
@@ -100,7 +103,6 @@ resource "databricks_default_namespace_setting" "this" {
   depends_on = [databricks_metastore_assignment.this]
 }
 
-# 3. CHANGE: Explicitly disable legacy Hive Metastore access and DBFS root access
 resource "databricks_disable_legacy_access_setting" "this" {
   provider = databricks.workspace_level
   disable_legacy_access {
