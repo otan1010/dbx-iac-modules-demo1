@@ -19,19 +19,7 @@ dependency "dbx_acc_adm_grp" {
   }
 }
 
-dependency "dbx_mstore_adm_grp" {
-  config_path = "../dbx_mstore_adm_grp" 
-
-  mock_outputs = {
-    entraid_group_object_id = 00000000-0000-0000-0000-000000000000
-    entraid_group_display_name = "mock_dbx_mstore_adm_grp"
-  }
-}
-
 inputs = {
   dbx_acc_adm_grp_object_id = dependency.dbx_acc_adm_grp.outputs.entraid_group_object_id
   dbx_acc_adm_grp_display_name = dependency.dbx_acc_adm_grp.outputs.entraid_group_display_name
-
-  dbx_mstore_adm_grp_object_id = dependency.dbx_mstore_adm_grp.outputs.entraid_group_object_id
-  dbx_mstore_adm_grp_display_name = dependency.dbx_mstore_adm_grp.outputs.entraid_group_display_name
 }
