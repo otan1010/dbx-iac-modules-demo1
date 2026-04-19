@@ -63,6 +63,7 @@ resource "azurerm_subnet_network_security_group_association" "private" {
 
 # --- DATABRICKS WORKSPACE ---
 resource "azurerm_databricks_workspace" "this" {
+  provider                    = databricks.account_level
   name                        = var.name
   location                    = var.region
   resource_group_name         = var.rg
@@ -84,6 +85,7 @@ resource "azurerm_databricks_workspace" "this" {
 
 # 1. Standard Metastore Assignment
 resource "databricks_metastore_assignment" "this" {
+  provider = databricks.account_level
   metastore_id = var.databricks_metastore_id
   workspace_id = azurerm_databricks_workspace.this.workspace_id
 }
