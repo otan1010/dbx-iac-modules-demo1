@@ -22,7 +22,7 @@ inputs = {
   dbx_acc_adm_grp_object_id = dependency.dbx_acc_adm_grp.outputs.entraid_group_object_id
 }
 
-### This is a cross-stack dependency, which is currently (2026-14-14) not supported, see:
+### These are a cross-stack dependencies, which is currently (2026-14-14) not supported, see:
 ### https://docs.terragrunt.com/features/stacks/explicit/#dependencies-cannot-be-set-on-stacks
 ### The workaround is to create a dependency from one unit in a stack to another unit in another
 ### stack. Since the relative paths between them is evaluated after generation, the path needs
