@@ -86,6 +86,12 @@ resource "databricks_metastore_assignment" "this" {
   workspace_id = azurerm_databricks_workspace.this.workspace_id
 }
 
+resource "databricks_group" "dbx_ws_adm_grp" {
+  provider     = databricks.account
+  display_name = azuread_group.entra_admin_group.display_name
+  external_id  = azuread_group.entra_admin_group.object_id
+}
+
 resource "databricks_mws_permission_assignment" "dbx_ws_adm_grp" {
   provider = databricks.account_level
   workspace_id = azurerm_databricks_workspace.this.workspace_id
