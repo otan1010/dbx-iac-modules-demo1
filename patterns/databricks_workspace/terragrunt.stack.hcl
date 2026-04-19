@@ -41,7 +41,7 @@ unit "dbx_ws_adm_grp" {
   path = "dbx_ws_adm_grp"
   values = {
     version = "main"
-    name = "admins-${ws_name}"
+    name = "admins-${local.ws_name}"
     desc = "Databricks Administrator group for Workspace-level access."
   }
 }
