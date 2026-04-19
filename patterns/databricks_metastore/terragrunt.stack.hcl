@@ -8,7 +8,7 @@ unit "databricks_metastore" {
   path = "metastore"
   values = {
     version = "main"
-    name = "metastore"
+    name = "metastore-${local.region}"
     region = "${local.region}"
   }
 }
