@@ -16,9 +16,9 @@ unit "dbx_acc_adm_grp" {
   }
 }
 
-unit "dbx_metastore_adm_grp" {
+unit "dbx_mstore_adm_grp" {
   source = "git::https://github.com/otan1010/dbx-iac-modules-demo1.git//units/azure_group?ref=main"
-  path = "dbx_acc_adm_grp"
+  path = "dbx_mstore_adm_grp"
   values = {
     version = "main"
     name = "dbx-metastore-admins"
