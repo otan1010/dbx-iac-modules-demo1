@@ -63,7 +63,6 @@ resource "azurerm_subnet_network_security_group_association" "private" {
 
 # --- DATABRICKS WORKSPACE ---
 resource "azurerm_databricks_workspace" "this" {
-  provider                    = databricks.account_level
   name                        = var.name
   location                    = var.region
   resource_group_name         = var.rg
