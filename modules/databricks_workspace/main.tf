@@ -86,10 +86,10 @@ resource "databricks_metastore_assignment" "this" {
   workspace_id = azurerm_databricks_workspace.this.workspace_id
 }
 
-resource "databricks_mws_permission_assignment" "ws_adm_grp" {
+resource "databricks_mws_permission_assignment" "dbx_ws_adm_grp" {
   provider = databricks.account_level
   workspace_id = azurerm_databricks_workspace.this.workspace_id
-  principal_id = databricks_group.data_eng.id
+  principal_id = var.dbx_ws_adm_grp_object_id
   permissions  = ["ADMIN"]
 }
 
