@@ -90,6 +90,7 @@ resource "databricks_metastore_assignment" "this" {
 
 # 2. CHANGE: Set 'main' (or your UC catalog) as default so users don't land in hive_metastore
 resource "databricks_default_namespace_setting" "this" {
+  provider = databricks.workspace_level
   namespace {
     value = "main" 
   }
@@ -100,6 +101,7 @@ resource "databricks_default_namespace_setting" "this" {
 
 # 3. CHANGE: Explicitly disable legacy Hive Metastore access and DBFS root access
 resource "databricks_disable_legacy_access_setting" "this" {
+  provider = databricks.workspace_level
   disable_legacy_access {
     value = true
   }
