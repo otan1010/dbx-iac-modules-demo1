@@ -93,7 +93,7 @@ resource "databricks_group" "dbx_ws_adm_grp" {
 }
 
 resource "databricks_mws_permission_assignment" "dbx_ws_adm_grp" {
-  provider = databricks.workspace_level
+  #provider = databricks.workspace_level
   workspace_id = azurerm_databricks_workspace.this.workspace_id
   principal_id = databricks_group.dbx_ws_adm_grp.id
   permissions  = ["ADMIN"]
