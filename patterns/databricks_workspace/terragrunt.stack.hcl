@@ -35,3 +35,13 @@ unit "core_databricks_workspace" {
     rg = "${local.rg_name}"
   }
 }
+
+unit "dbx_ws_adm_grp" {
+  source = "git::https://github.com/otan1010/dbx-iac-modules-demo1.git//units/azure_group?ref=main"
+  path = "dbx_ws_adm_grp"
+  values = {
+    version = "main"
+    name = "admins-${ws_name}"
+    desc = "Databricks Administrator group for Workspace-level access."
+  }
+}
