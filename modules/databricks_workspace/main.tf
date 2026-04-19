@@ -88,14 +88,14 @@ resource "databricks_metastore_assignment" "this" {
 
 resource "databricks_group" "dbx_ws_adm_grp" {
   provider     = databricks.account
-  display_name = azuread_group.entra_admin_group.display_name
-  external_id  = azuread_group.entra_admin_group.object_id
+  display_name = var.dbx_ws_adm_grp_display_name
+  external_id  = var.dbx_ws_adm_grp_object_id
 }
 
 resource "databricks_mws_permission_assignment" "dbx_ws_adm_grp" {
-  provider = databricks.account_level
+  provider = databricks.workspace_level
   workspace_id = azurerm_databricks_workspace.this.workspace_id
-  principal_id = var.dbx_ws_adm_grp_object_id
+  principal_id = databricks_group.dbx_ws_adm_grp.id
   permissions  = ["ADMIN"]
 }
 
