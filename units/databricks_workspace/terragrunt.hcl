@@ -24,7 +24,7 @@ inputs = {
   rg = values.rg
   databricks_metastore_id = dependency.dbx_metastore_id.outputs.databricks_metastore_id
   dbx_ws_adm_grp_object_id = dependency.dbx_ws_adm_grp.outputs.entraid_group_object_id
-  #dbx_ws_adm_grp_display_name = dependency.dbx_ws_adm_grp.outputs.entraid_group_display_name
+  dbx_ws_adm_grp_display_name = dependency.dbx_ws_adm_grp.outputs.entraid_group_display_name
 }
 
 dependency "dbx_ws_adm_grp" {
@@ -32,7 +32,7 @@ dependency "dbx_ws_adm_grp" {
 
   mock_outputs = {
     entraid_group_object_id = 00000000-0000-0000-0000-000000000000
-    #entraid_group_display_name = "mock_dbx_ws_adm_grp"
+    entraid_group_display_name = "mock_dbx_ws_adm_grp"
   }
 }
 
