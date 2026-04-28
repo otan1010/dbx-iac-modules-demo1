@@ -87,7 +87,7 @@ resource "databricks_metastore_assignment" "this" {
 }
 
 resource "databricks_group" "dbx_ws_adm_grp" {
-  provider     = databricks.account_level
+  #provider     = databricks.account_level
   display_name = var.dbx_ws_adm_grp_display_name
   external_id  = var.dbx_ws_adm_grp_object_id
 }
