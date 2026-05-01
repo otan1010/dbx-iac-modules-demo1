@@ -43,7 +43,7 @@ dependency "dbx_ws_adm_grp" {
 ### to traverse all static and dynamic folders (".terragrunt-stack", etc.). This is very brittle
 ### and depends on a very specific folder structure in the live repository. However, in order
 ### to follow DRY principles this is necessary (which is the whole point of terragrunt to begin
-### with).
+### with). It's fine as long as the live repository stays the same though.
 
 dependency "dbx_metastore_id" {
   config_path = "../../../../../../metastore/.terragrunt-stack/databricks_metastore/.terragrunt-stack/metastore"
