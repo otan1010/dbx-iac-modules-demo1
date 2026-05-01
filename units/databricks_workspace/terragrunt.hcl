@@ -25,6 +25,8 @@ inputs = {
   databricks_metastore_id = dependency.dbx_metastore_id.outputs.databricks_metastore_id
   dbx_ws_adm_grp_object_id = dependency.dbx_ws_adm_grp.outputs.entraid_group_object_id
   dbx_ws_adm_grp_display_name = dependency.dbx_ws_adm_grp.outputs.entraid_group_display_name
+
+  debug_dependency_path = dependency.dbx_metastore_id.config_path
 }
 
 dependency "dbx_ws_adm_grp" {
