@@ -25,8 +25,6 @@ inputs = {
   databricks_metastore_id = dependency.dbx_metastore_id.outputs.databricks_metastore_id
   dbx_ws_adm_grp_object_id = dependency.dbx_ws_adm_grp.outputs.entraid_group_object_id
   dbx_ws_adm_grp_display_name = dependency.dbx_ws_adm_grp.outputs.entraid_group_display_name
-
-  debug_dependency_path = dependency.dbx_metastore_id.config_path
 }
 
 dependency "dbx_ws_adm_grp" {
@@ -53,22 +51,4 @@ dependency "dbx_metastore_id" {
   mock_outputs = {
     databricks_metastore_id = 00000000-0000-0000-0000-000000000000
   }
-}
-
-locals {
-  current_dir = get_terragrunt_dir()
-
-  resolved_path = abspath("${local.current_dir}/${dependency.dbx_metastore_id.config_path}")
-}
-
-output "debug_current_dir" {
-  value = local.current_dir
-}
-
-output "debug_config_path_raw" {
-  value = dependency.dbx_metastore_id.config_path
-}
-
-output "debug_resolved_path" {
-  value = local.resolved_path
 }
