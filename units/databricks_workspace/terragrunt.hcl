@@ -19,28 +19,36 @@ terraform {
 }
 
 inputs = {
-  name  = values.name
+  name = values.name
   region = values.region
-  rg     = values.rg
-
-  databricks_metastore_id        = dependency.dbx_metastore.outputs.databricks_metastore_id
-  dbx_ws_adm_grp_object_id       = dependency.dbx_ws_adm_grp.outputs.entraid_group_object_id
-  dbx_ws_adm_grp_display_name    = dependency.dbx_ws_adm_grp.outputs.entraid_group_display_name
+  rg = values.rg
+  databricks_metastore_id = dependency.dbx_metastore_id.outputs.databricks_metastore_id
+  dbx_ws_adm_grp_object_id = dependency.dbx_ws_adm_grp.outputs.entraid_group_object_id
+  dbx_ws_adm_grp_display_name = dependency.dbx_ws_adm_grp.outputs.entraid_group_display_name
 }
 
 dependency "dbx_ws_adm_grp" {
-  config_path = "../dbx_ws_adm_grp"
+  config_path = "../dbx_ws_adm_grp" 
 
   mock_outputs = {
-    entraid_group_object_id     = "00000000-0000-0000-0000-000000000000"
-    entraid_group_display_name  = "mock_dbx_ws_adm_grp"
+    entraid_group_object_id = 00000000-0000-0000-0000-000000000000
+    entraid_group_display_name = "mock_dbx_ws_adm_grp"
   }
 }
 
-dependency "dbx_metastore" {
-  config_path = "../../../metastore"
+### These are a cross-stack dependencies, which is currently (2026-14-14) not supported, see:
+### https://docs.terragrunt.com/features/stacks/explicit/#dependencies-cannot-be-set-on-stacks
+### The workaround is to create a dependency from one unit in a stack to another unit in another
+### stack. Since the relative paths between them is evaluated after generation, the path needs
+### to traverse all static and dynamic folders (".terragrunt-stack", etc.). This is very brittle
+### and depends on a very specific folder structure in the live repository. However, in order
+### to follow DRY principles this is necessary (which is the whole point of terragrunt to begin
+### with).
+
+dependency "dbx_metastore_id" {
+  config_path = "../../../../../../metastore/.terragrunt-stack/databricks_metastore/.terragrunt-stack/metastore"
 
   mock_outputs = {
-    databricks_metastore_id = "00000000-0000-0000-0000-000000000000"
+    databricks_metastore_id = 00000000-0000-0000-0000-000000000000
   }
 }
