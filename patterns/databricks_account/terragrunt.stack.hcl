@@ -11,7 +11,7 @@ unit "dbx_acc_adm_grp" {
   path = "dbx_acc_adm_grp"
   values = {
     version = "main"
-    name = "dbx-account-admins"
+    name = "admins-acc-dbx"
     desc = "Databricks Administrator group for Account-level access."
   }
 }
