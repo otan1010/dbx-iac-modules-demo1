@@ -15,6 +15,16 @@ locals {
   ws_name = "ws-dbx-${local.environment}-${local.region}-${local.owner}"
 }
 
+unit "dbx_ws_adm_grp" {
+  source = "git::https://github.com/otan1010/dbx-iac-modules-demo1.git//units/azure_group?ref=main"
+  path = "dbx_ws_adm_grp"
+  values = {
+    version = "main"
+    name = "admins-${local.ws_name}"
+    desc = "Databricks Administrator group for Workspace-level access."
+  }
+}
+
 unit "core_databricks_resource_group" {
   source = "git::https://github.com/otan1010/dbx-iac-modules-demo1.git//units/azure_resource_group?ref=main"
   path = "${local.rg_name}"
@@ -33,15 +43,5 @@ unit "core_databricks_workspace" {
     name = "${local.ws_name}"
     region = "${local.region}"
     rg = "${local.rg_name}"
-  }
-}
-
-unit "dbx_ws_adm_grp" {
-  source = "git::https://github.com/otan1010/dbx-iac-modules-demo1.git//units/azure_group?ref=main"
-  path = "dbx_ws_adm_grp"
-  values = {
-    version = "main"
-    name = "admins-${local.ws_name}"
-    desc = "Databricks Administrator group for Workspace-level access."
   }
 }
